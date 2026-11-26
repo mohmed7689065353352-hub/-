@@ -24,10 +24,13 @@ jobs:
           java-version: '17'
 
       - name: Prepare Android SDK
+        shell: bash
         run: |
-          echo "ANDROID_HOME=/usr/local/lib/android/sdk" >> "$GITHUB_ENV"
-          SDKMANAGER="$(command -v sdkmanager)"
-          echo "Using SDK manager at: $SDKMANAGER"
+          set -euxo pipefail
+          export ANDROID_HOME=/usr/local/lib/android/sdk
+          echo "ANDROID_HOME=$ANDROID_HOME" >> "$GITHUB_ENV"
+          SDKMANAGER="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
+          test -x "$SDKMANAGER"
           "$SDKMANAGER" --version
           yes | "$SDKMANAGER" --licenses >/dev/null || true
           "$SDKMANAGER" "platform-tools" "platforms;android-35" "build-tools;35.0.0"
@@ -39,7 +42,7 @@ jobs:
         run: |
           java -version
           gradle --version
-          sdkmanager --list_installed
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --list_installed
 
       - name: Build debug APK
         run: gradle --no-daemon --stacktrace assembleDebug
