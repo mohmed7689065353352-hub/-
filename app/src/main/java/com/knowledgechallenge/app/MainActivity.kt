@@ -861,6 +861,55 @@ private fun normalize(v:String)=v.trim().lowercase().replace("أ","ا").replace(
  }
 }
 @Composable private fun Stat(label:String,value:String){Column{Text(value,color=Color.White,fontSize=20.sp,fontWeight=FontWeight.Bold);Text(label,color=Muted,fontSize=10.sp)}}
+
+private fun modePalette(mode:Mode):List<Color> = when(mode){
+ Mode.DETECTIVE -> listOf(Color(0xFF172554),Color(0xFF2563EB),Color(0xFF38BDF8))
+ Mode.RIDDLE -> listOf(Color(0xFF3B0764),Color(0xFF7C3AED),Color(0xFFC084FC))
+ Mode.CORRECT -> listOf(Color(0xFF064E3B),Color(0xFF059669),Color(0xFF6EE7B7))
+ Mode.MEMORY -> listOf(Color(0xFF7C2D12),Color(0xFFEA580C),Color(0xFFFBBF24))
+ Mode.PATTERN -> listOf(Color(0xFF164E63),Color(0xFF0891B2),Color(0xFF67E8F9))
+ Mode.WRITE -> listOf(Color(0xFF831843),Color(0xFFDB2777),Color(0xFFF9A8D4))
+}
+private fun modeArtwork(mode:Mode):String = when(mode){
+ Mode.DETECTIVE -> "🕵️"
+ Mode.RIDDLE -> "🧩"
+ Mode.CORRECT -> "⚖️"
+ Mode.MEMORY -> "🧠"
+ Mode.PATTERN -> "🔢"
+ Mode.WRITE -> "✍️"
+}
+private fun modeTagline(mode:Mode):String = when(mode){
+ Mode.DETECTIVE -> "اجمع القرائن، اربط الأدلة، واكتشف الإجابة."
+ Mode.RIDDLE -> "فكّر بذكاء… فالحل أقرب مما تتخيّل."
+ Mode.CORRECT -> "اختبر معلوماتك وصحّح المفاهيم بدقة."
+ Mode.MEMORY -> "ركّز جيداً، فالتفاصيل الصغيرة تصنع الفرق."
+ Mode.PATTERN -> "اكتشف القاعدة الخفية وأكمل التسلسل."
+ Mode.WRITE -> "أطلق معرفتك واكتب الحل من دون خيارات."
+}
+@Composable private fun ModeHero(mode:Mode,number:Int,total:Int){
+ val palette=modePalette(mode)
+ Box(Modifier.fillMaxWidth().height(176.dp).background(Brush.linearGradient(palette),RoundedCornerShape(26.dp)).padding(18.dp)){
+  Box(Modifier.size(124.dp).align(Alignment.CenterEnd).offset(x=12.dp,y=12.dp).background(Color(0x22FFFFFF),RoundedCornerShape(100.dp)))
+  Box(Modifier.size(78.dp).align(Alignment.TopEnd).offset(x=(-10).dp,y=(-22).dp).background(Color(0x22FFFFFF),RoundedCornerShape(100.dp)))
+  Text("✦",Modifier.align(Alignment.TopStart).offset(x=5.dp,y=3.dp),color=Color(0xCCFFFFFF),fontSize=22.sp)
+  Text("✧",Modifier.align(Alignment.BottomCenter).offset(x=(-45).dp,y=2.dp),color=Color(0xCCFFFFFF),fontSize=26.sp)
+  Column(Modifier.align(Alignment.CenterStart).fillMaxWidth(.66f)){
+   Text(mode.title,color=Color.White,fontSize=21.sp,fontWeight=FontWeight.ExtraBold)
+   Spacer(Modifier.height(7.dp))
+   Text(modeTagline(mode),color=Color(0xFFF4F1FF),fontSize=11.sp,lineHeight=18.sp)
+   Spacer(Modifier.height(12.dp))
+   Row(Modifier.background(Color(0x33FFFFFF),RoundedCornerShape(30.dp)).padding(horizontal=11.dp,vertical=6.dp),verticalAlignment=Alignment.CenterVertically){
+    Text("الجولة $number / $total",color=Color.White,fontSize=10.sp,fontWeight=FontWeight.Bold)
+   }
+  }
+  Box(Modifier.size(112.dp).align(Alignment.CenterEnd).background(Color(0x33FFFFFF),RoundedCornerShape(30.dp)),contentAlignment=Alignment.Center){
+   Text(modeArtwork(mode),fontSize=61.sp)
+  }
+  Row(Modifier.align(Alignment.BottomEnd).padding(end=4.dp,bottom=2.dp),horizontalArrangement=Arrangement.spacedBy(5.dp)){
+   repeat(3){i->Box(Modifier.size(if(i==0)7.dp else 5.dp).background(Color(0xCCFFFFFF),RoundedCornerShape(20.dp)))}
+  }
+ }
+}
 @Composable private fun ChallengeScreen(c:Challenge,number:Int,total:Int,score:Int,onBack:()->Unit,onSpend:(Int)->Unit,onNext:(Boolean)->Unit){
  var clueCount by remember(c){mutableIntStateOf(0)}
  var helpMessage by remember(c){mutableStateOf("")}
@@ -872,8 +921,10 @@ private fun normalize(v:String)=v.trim().lowercase().replace("أ","ا").replace(
  val correct=c.answers.any{normalize(answer)==normalize(it)}
  LaunchedEffect(c){if(c.mode==Mode.MEMORY){revealMemory=true;kotlinx.coroutines.delay(3500);revealMemory=false}}
  Column(Modifier.fillMaxSize().background(Brush.verticalGradient(listOf(Color(0xFF090D2B),Color(0xFF1B1650),Color(0xFF0B1238)))).verticalScroll(rememberScrollState()).padding(18.dp)){
-  Row(Modifier.fillMaxWidth(),verticalAlignment=Alignment.CenterVertically){TextButton(onClick=onBack){Text("→ رجوع",color=Purple,fontWeight=FontWeight.Bold)};Spacer(Modifier.weight(1f));Text("تحدّي المعرفة",color=Color.White,fontWeight=FontWeight.ExtraBold)}
+  Row(Modifier.fillMaxWidth(),verticalAlignment=Alignment.CenterVertically){TextButton(onClick=onBack){Text("→ رجوع",color=Color.White,fontWeight=FontWeight.Bold)};Spacer(Modifier.weight(1f));Text("تحدّي المعرفة",color=Color.White,fontWeight=FontWeight.ExtraBold)}
   Spacer(Modifier.height(12.dp))
+  ModeHero(c.mode,number,total)
+  Spacer(Modifier.height(14.dp))
   Column(Modifier.fillMaxWidth().background(Brush.linearGradient(listOf(Purple,Color(0xFFAA83F2))),RoundedCornerShape(24.dp)).padding(18.dp)){
    Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween){Text(c.mode.title,color=Color.White,fontSize=15.sp,fontWeight=FontWeight.Bold);Text("السؤال "+number+" من "+total,color=Color.White,fontSize=12.sp)}
    Spacer(Modifier.height(13.dp));LinearProgressIndicator(progress={number.toFloat()/total.coerceAtLeast(1)},modifier=Modifier.fillMaxWidth().height(7.dp),color=Color(0xFFFFD18B),trackColor=Color(0x557FFFFFFF))
