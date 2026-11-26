@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
+import androidx.compose.ui.Alignment
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -83,33 +84,62 @@ private fun normalize(v:String)=v.trim().lowercase().replace("أ","ا").replace(
  }
 }
 @Composable private fun HomeScreen(score:Int,solved:Int,streak:Int,onStart:(Mode)->Unit){
- Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(20.dp)){
-  Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween){
-   Column{Text("تحدي المعرفة",color=Gold,fontSize=28.sp,fontWeight=FontWeight.ExtraBold);Text("فكّر، اكتشف، وتحدَّ نفسك",color=Muted,fontSize=13.sp)}
-   Text("✦",color=Gold,fontSize=36.sp)
+ val bg=Color(0xFFF5F2FC); val ink=Color(0xFF29243F); val muted=Color(0xFF858097)
+ Column(Modifier.fillMaxSize().background(bg).verticalScroll(rememberScrollState()).padding(horizontal=18.dp, vertical=16.dp)){
+  Row(Modifier.fillMaxWidth(),verticalAlignment=Alignment.CenterVertically,horizontalArrangement=Arrangement.SpaceBetween){
+   Row(verticalAlignment=Alignment.CenterVertically){
+    Box(Modifier.size(48.dp).background(Brush.linearGradient(listOf(Color(0xFF7657D6),Color(0xFFB28CF6))),RoundedCornerShape(16.dp)),contentAlignment=Alignment.Center){Text("🧠",fontSize=26.sp)}
+    Spacer(Modifier.width(10.dp));Column{Text("تحدّي المعرفة",color=ink,fontSize=21.sp,fontWeight=FontWeight.ExtraBold);Text("العب بذكاء… واصنع إنجازك",color=muted,fontSize=11.sp)}
+   }
+   Row(Modifier.background(Color.White,RoundedCornerShape(20.dp)).padding(horizontal=12.dp,vertical=9.dp),verticalAlignment=Alignment.CenterVertically){Text("🪙",fontSize=16.sp);Spacer(Modifier.width(5.dp));Text(score.toString(),color=ink,fontWeight=FontWeight.Bold,fontSize=14.sp)}
+  }
+  Spacer(Modifier.height(18.dp))
+  Box(Modifier.fillMaxWidth().height(205.dp).background(Brush.linearGradient(listOf(Color(0xFF7356D8),Color(0xFFAA83F2),Color(0xFFFFB27E))),RoundedCornerShape(28.dp)).padding(18.dp)){
+   Column(Modifier.align(Alignment.CenterStart).fillMaxWidth(.65f)){
+    Text("تحدّى عقلك اليوم!",color=Color.White,fontSize=23.sp,fontWeight=FontWeight.ExtraBold,lineHeight=30.sp)
+    Spacer(Modifier.height(7.dp));Text("أسئلة ممتعة، ألغاز ذكية، ومنافسة ترفع رصيدك من المعرفة.",color=Color.White,fontSize=12.sp,lineHeight=19.sp)
+    Spacer(Modifier.height(13.dp))
+    Row(Modifier.background(Color.White,RoundedCornerShape(22.dp)).clickable{onStart(Mode.RIDDLE)}.padding(horizontal=16.dp,vertical=10.dp),verticalAlignment=Alignment.CenterVertically){Text("ابدأ التحدي",color=Color(0xFF7356D8),fontWeight=FontWeight.Bold,fontSize=12.sp);Spacer(Modifier.width(7.dp));Text("←",color=Color(0xFF7356D8),fontWeight=FontWeight.Bold)}
+   }
+   Text("🏆",fontSize=76.sp,modifier=Modifier.align(Alignment.CenterEnd).padding(end=1.dp))
+   Text("✨",fontSize=28.sp,modifier=Modifier.align(Alignment.TopEnd).padding(end=12.dp))
+   Text("🧩",fontSize=30.sp,modifier=Modifier.align(Alignment.BottomEnd).padding(end=16.dp,bottom=8.dp))
+  }
+  Spacer(Modifier.height(17.dp))
+  Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.spacedBy(9.dp)){
+   MiniStat("⭐","النقاط",score.toString(),Modifier.weight(1f))
+   MiniStat("🎯","تم حلها",solved.toString(),Modifier.weight(1f))
+   MiniStat("🔥","متتالية",streak.toString(),Modifier.weight(1f))
   }
   Spacer(Modifier.height(22.dp))
-  Column(Modifier.fillMaxWidth().background(Brush.linearGradient(listOf(Color(0xFF244858),Color(0xFF172536))),RoundedCornerShape(24.dp)).padding(20.dp)){
-   Text("مرحباً بك في ساحة التحدي",color=Gold,fontSize=13.sp);Spacer(Modifier.height(7.dp))
-   Text("المعرفة ليست حفظاً…\\nإنها طريقة تفكير.",color=Color.White,fontSize=24.sp,fontWeight=FontWeight.Bold,lineHeight=34.sp)
-   Spacer(Modifier.height(20.dp))
-   Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween){Stat("النقاط",score.toString());Stat("تم حلها",solved.toString());Stat("متتالية",streak.toString())}
-  }
-  Spacer(Modifier.height(25.dp));Text("اختر نمط التحدي",color=Color.White,fontSize=20.sp,fontWeight=FontWeight.Bold)
-  Text("أسئلة متنوعة لاختبار مهارات مختلفة",color=Muted,fontSize=12.sp);Spacer(Modifier.height(15.dp))
-  Mode.values().toList().chunked(2).forEach{group->
-   Row(horizontalArrangement=Arrangement.spacedBy(12.dp)){
-    group.forEach{mode->
-     Column(Modifier.weight(1f).padding(bottom=12.dp).background(Panel,RoundedCornerShape(18.dp)).clickable{onStart(mode)}.padding(16.dp)){
-      Text(mode.mark,color=Gold,fontSize=28.sp);Spacer(Modifier.height(8.dp))
-      Text(mode.title,color=Color.White,fontWeight=FontWeight.Bold,fontSize=15.sp);Spacer(Modifier.height(5.dp))
-      Text(mode.subtitle,color=Muted,fontSize=11.sp,lineHeight=16.sp);Spacer(Modifier.height(8.dp))
-      Text(bank.count{it.mode==mode}.toString()+" تحديات",color=Mint,fontSize=11.sp)
+  Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically){Text("اختر مغامرتك",color=ink,fontSize=19.sp,fontWeight=FontWeight.ExtraBold);Text("٦ أنماط",color=Color(0xFF7657D6),fontSize=11.sp,fontWeight=FontWeight.Bold)}
+  Text("كل نمط يختبر مهارة مختلفة لديك",color=muted,fontSize=12.sp,modifier=Modifier.padding(top=4.dp,bottom=13.dp))
+  val colors=listOf(Color(0xFFFFEEE4),Color(0xFFEDE8FF),Color(0xFFE1F7F4),Color(0xFFFFF3D9),Color(0xFFE5F0FF),Color(0xFFFFE8F1))
+  val emojis=listOf("🕵️","🧩","⚡","🧠","🔢","✍️")
+  Mode.values().toList().chunked(2).forEachIndexed{row,group->
+   Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.spacedBy(11.dp)){
+    group.forEachIndexed{col,mode->
+     val i=row*2+col
+     Column(Modifier.weight(1f).padding(bottom=11.dp).background(Color.White,RoundedCornerShape(21.dp)).clickable{onStart(mode)}.padding(14.dp)){
+      Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically){
+       Box(Modifier.size(46.dp).background(colors[i],RoundedCornerShape(15.dp)),contentAlignment=Alignment.Center){Text(emojis[i],fontSize=25.sp)}
+       Text("↗",color=muted,fontSize=17.sp)
+      }
+      Spacer(Modifier.height(11.dp));Text(mode.title,color=ink,fontWeight=FontWeight.ExtraBold,fontSize=14.sp)
+      Text(mode.subtitle,color=muted,fontSize=10.sp,lineHeight=15.sp,modifier=Modifier.padding(top=4.dp),maxLines=2)
+      Spacer(Modifier.height(9.dp));Text(bank.count{it.mode==mode}.toString()+" جولات متاحة",color=if(i%2==0)Color(0xFFFF8A45) else Color(0xFF7657D6),fontSize=10.sp,fontWeight=FontWeight.Bold)
      }
     }
    }
   }
-  Text("تقدمك محفوظ على هذا الجهاز",color=Mint,fontSize=12.sp,modifier=Modifier.fillMaxWidth(),textAlign=TextAlign.Center)
+  Row(Modifier.fillMaxWidth().background(Color(0xFFEDE8FF),RoundedCornerShape(16.dp)).padding(13.dp),verticalAlignment=Alignment.CenterVertically){Text("💡",fontSize=22.sp);Spacer(Modifier.width(9.dp));Column{Text("معلومة صغيرة تصنع فرقاً",color=Color(0xFF7657D6),fontSize=12.sp,fontWeight=FontWeight.Bold);Text("استمر في اللعب، وتعلّم شيئاً جديداً كل يوم.",color=muted,fontSize=10.sp)}}
+  Spacer(Modifier.height(18.dp))
+ }
+}
+@Composable private fun MiniStat(icon:String,label:String,value:String,modifier:Modifier=Modifier){
+ Column(modifier.background(Color.White,RoundedCornerShape(18.dp)).padding(vertical=12.dp,horizontal=10.dp)){
+  Row(verticalAlignment=Alignment.CenterVertically){Text(icon,fontSize=16.sp);Spacer(Modifier.width(6.dp));Text(value,color=Color(0xFF29243F),fontSize=18.sp,fontWeight=FontWeight.ExtraBold)}
+  Text(label,color=Color(0xFF858097),fontSize=10.sp,modifier=Modifier.padding(top=5.dp))
  }
 }
 @Composable private fun Stat(label:String,value:String){Column{Text(value,color=Color.White,fontSize=20.sp,fontWeight=FontWeight.Bold);Text(label,color=Muted,fontSize=10.sp)}}
