@@ -174,12 +174,12 @@ private fun normalize(v:String)=v.trim().lowercase().replace("أ","ا").replace(
  }
 }
 @Composable private fun HomeScreen(score:Int,solved:Int,streak:Int,onStart:(Mode)->Unit){
- val bg=Color(0xFFF5F2FC); val ink=Color(0xFF29243F); val muted=Color(0xFF858097)
- Column(Modifier.fillMaxSize().background(bg).verticalScroll(rememberScrollState()).padding(horizontal=18.dp, vertical=16.dp)){
+ val bg=Color(0xFF090D2B); val ink=Color(0xFF29243F); val muted=Color(0xFF858097)
+ Column(Modifier.fillMaxSize().background(Brush.verticalGradient(listOf(Color(0xFF080D2C),Color(0xFF17134A),Color(0xFF26145A),Color(0xFF090D2B)))).verticalScroll(rememberScrollState()).padding(horizontal=18.dp, vertical=16.dp)){
   Row(Modifier.fillMaxWidth(),verticalAlignment=Alignment.CenterVertically,horizontalArrangement=Arrangement.SpaceBetween){
    Row(verticalAlignment=Alignment.CenterVertically){
     Box(Modifier.size(48.dp).background(Brush.linearGradient(listOf(Color(0xFF7657D6),Color(0xFFB28CF6))),RoundedCornerShape(16.dp)),contentAlignment=Alignment.Center){Text("🧠",fontSize=26.sp)}
-    Spacer(Modifier.width(10.dp));Column{Text("تحدّي المعرفة",color=ink,fontSize=21.sp,fontWeight=FontWeight.ExtraBold);Text("العب بذكاء… واصنع إنجازك",color=muted,fontSize=11.sp)}
+    Spacer(Modifier.width(10.dp));Column{Text("تحدّي المعرفة",color=Color.White,fontSize=21.sp,fontWeight=FontWeight.ExtraBold);Text("العب بذكاء… واصنع إنجازك",color=Color(0xFFBFC9F8),fontSize=11.sp)}
    }
    Row(Modifier.background(Color.White,RoundedCornerShape(20.dp)).padding(horizontal=12.dp,vertical=9.dp),verticalAlignment=Alignment.CenterVertically){Text("🪙",fontSize=16.sp);Spacer(Modifier.width(5.dp));Text(score.toString(),color=ink,fontWeight=FontWeight.Bold,fontSize=14.sp)}
   }
@@ -202,15 +202,15 @@ private fun normalize(v:String)=v.trim().lowercase().replace("أ","ا").replace(
    MiniStat("🔥","متتالية",streak.toString(),Modifier.weight(1f))
   }
   Spacer(Modifier.height(22.dp))
-  Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically){Text("اختر مغامرتك",color=ink,fontSize=19.sp,fontWeight=FontWeight.ExtraBold);Text("٦ أنماط",color=Color(0xFF7657D6),fontSize=11.sp,fontWeight=FontWeight.Bold)}
-  Text("كل نمط يختبر مهارة مختلفة لديك",color=muted,fontSize=12.sp,modifier=Modifier.padding(top=4.dp,bottom=13.dp))
+  Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically){Text("اختر مغامرتك",color=Color.White,fontSize=19.sp,fontWeight=FontWeight.ExtraBold);Text("٦ أنماط",color=Color(0xFF7657D6),fontSize=11.sp,fontWeight=FontWeight.Bold)}
+  Text("كل نمط يختبر مهارة مختلفة لديك",color=Color(0xFFBFC9F8),fontSize=12.sp,modifier=Modifier.padding(top=4.dp,bottom=13.dp))
   val colors=listOf(Color(0xFFFFEEE4),Color(0xFFEDE8FF),Color(0xFFE1F7F4),Color(0xFFFFF3D9),Color(0xFFE5F0FF),Color(0xFFFFE8F1))
   val emojis=listOf("🕵️","🧩","⚡","🧠","🔢","✍️")
   Mode.values().toList().chunked(2).forEachIndexed{row,group->
    Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.spacedBy(11.dp)){
     group.forEachIndexed{col,mode->
      val i=row*2+col
-     Column(Modifier.weight(1f).padding(bottom=11.dp).background(Color.White,RoundedCornerShape(21.dp)).clickable{onStart(mode)}.padding(14.dp)){
+     Column(Modifier.weight(1f).padding(bottom=11.dp).background(Color(0xFFF8F7FF),RoundedCornerShape(21.dp)).clickable{onStart(mode)}.padding(14.dp)){
       Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically){
        Box(Modifier.size(46.dp).background(colors[i],RoundedCornerShape(15.dp)),contentAlignment=Alignment.Center){Text(emojis[i],fontSize=25.sp)}
        Text("↗",color=muted,fontSize=17.sp)
@@ -243,8 +243,8 @@ private fun normalize(v:String)=v.trim().lowercase().replace("أ","ا").replace(
  val memoryQuestion=c.prompt.substringAfter(". ","ما العنصر المطلوب؟")
  val correct=c.answers.any{normalize(answer)==normalize(it)}
  LaunchedEffect(c){if(c.mode==Mode.MEMORY){revealMemory=true;kotlinx.coroutines.delay(3500);revealMemory=false}}
- Column(Modifier.fillMaxSize().background(Canvas).verticalScroll(rememberScrollState()).padding(18.dp)){
-  Row(Modifier.fillMaxWidth(),verticalAlignment=Alignment.CenterVertically){TextButton(onClick=onBack){Text("→ رجوع",color=Purple,fontWeight=FontWeight.Bold)};Spacer(Modifier.weight(1f));Text("تحدّي المعرفة",color=Ink,fontWeight=FontWeight.ExtraBold)}
+ Column(Modifier.fillMaxSize().background(Brush.verticalGradient(listOf(Color(0xFF090D2B),Color(0xFF1B1650),Color(0xFF0B1238)))).verticalScroll(rememberScrollState()).padding(18.dp)){
+  Row(Modifier.fillMaxWidth(),verticalAlignment=Alignment.CenterVertically){TextButton(onClick=onBack){Text("→ رجوع",color=Purple,fontWeight=FontWeight.Bold)};Spacer(Modifier.weight(1f));Text("تحدّي المعرفة",color=Color.White,fontWeight=FontWeight.ExtraBold)}
   Spacer(Modifier.height(12.dp))
   Column(Modifier.fillMaxWidth().background(Brush.linearGradient(listOf(Purple,Color(0xFFAA83F2))),RoundedCornerShape(24.dp)).padding(18.dp)){
    Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween){Text(c.mode.title,color=Color.White,fontSize=15.sp,fontWeight=FontWeight.Bold);Text("السؤال "+number+" من "+total,color=Color.White,fontSize=12.sp)}
@@ -252,7 +252,7 @@ private fun normalize(v:String)=v.trim().lowercase().replace("أ","ا").replace(
    Spacer(Modifier.height(12.dp));Text("🎯  "+c.category,color=Color.White,fontSize=12.sp)
   }
   Spacer(Modifier.height(18.dp))
-  Column(Modifier.fillMaxWidth().background(Color.White,RoundedCornerShape(23.dp)).padding(19.dp)){
+  Column(Modifier.fillMaxWidth().background(Color(0xFFF9F8FF),RoundedCornerShape(23.dp)).padding(19.dp)){
    Text(if(c.mode==Mode.MEMORY&&revealMemory)"احفظ جيداً… ستختفي العناصر بعد لحظات" else "السؤال",color=Gold,fontSize=13.sp,fontWeight=FontWeight.ExtraBold)
    Spacer(Modifier.height(10.dp));Text(if(c.mode==Mode.MEMORY){if(revealMemory)memorySequence else memoryQuestion}else c.prompt,color=Ink,fontSize=21.sp,fontWeight=FontWeight.Bold,lineHeight=32.sp)
    if(c.mode==Mode.MEMORY&&revealMemory){Spacer(Modifier.height(10.dp));Text("⏳ احفظ التسلسل الآن",color=Purple,fontSize=12.sp,fontWeight=FontWeight.Bold)}
