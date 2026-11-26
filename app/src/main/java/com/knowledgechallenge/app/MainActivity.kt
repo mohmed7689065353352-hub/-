@@ -59,7 +59,59 @@ private val bank=listOf(
  Challenge(Mode.PATTERN,"منطق","ما العدد الناقص؟ 1، 4، 9، 16، ؟",listOf("هذه مربعات أعداد صحيحة متتالية"),listOf("25","خمسة وعشرون"),"الأعداد مربعات: 1²، 2²، 3²، 4²، ثم 5² = 25."),
  Challenge(Mode.WRITE,"علوم","ما اسم العملية التي تصنع بها النباتات غذاءها باستخدام ضوء الشمس؟",listOf("تحدث غالباً في الأوراق وتحتاج إلى الضوء"),listOf("البناء الضوئي","التمثيل الضوئي"),"البناء الضوئي يحول الطاقة الضوئية إلى طاقة كيميائية مخزنة في الغذاء."),
  Challenge(Mode.WRITE,"جغرافيا","ما أكبر قارة في العالم من حيث المساحة؟",listOf("تضم الصين والهند والعديد من الدول"),listOf("آسيا","قارة آسيا"),"آسيا هي أكبر قارات العالم مساحةً."),
- Challenge(Mode.WRITE,"ثقافة عامة","كم عدد أضلاع الشكل السداسي؟",listOf("اسمه يدل على العدد"),listOf("6","٦","ستة"),"الشكل السداسي له ستة أضلاع.")
+ Challenge(Mode.WRITE,"ثقافة عامة","كم عدد أضلاع الشكل السداسي؟",listOf("اسمه يدل على العدد"),listOf("6","٦","ستة"),"الشكل السداسي له ستة أضلاع."),
+
+ Challenge(Mode.DETECTIVE,"علوم الفضاء","ما اسم المجرة التي تنتمي إليها المجموعة الشمسية؟",listOf("تُعرف باسم درب التبانة","تبدو كشريط مضيء في السماء"),listOf("درب التبانة","مجرة درب التبانة"),"تقع المجموعة الشمسية في مجرة درب التبانة."),
+ Challenge(Mode.DETECTIVE,"تاريخ","ما اسم المدينة اليمنية القديمة المشهورة بسدها التاريخي؟",listOf("ارتبط اسمها بمملكة سبأ","ورد ذكرها في قصة بلقيس"),listOf("مأرب","مارب"),"مأرب من أهم مراكز مملكة سبأ، واشتهرت بسدها التاريخي."),
+ Challenge(Mode.DETECTIVE,"جغرافيا","ما عاصمة اليابان؟",listOf("مدينة كبرى تقع في جزيرة هونشو","تُعد مركزاً سياسياً واقتصادياً"),listOf("طوكيو"),"طوكيو هي عاصمة اليابان."),
+ Challenge(Mode.DETECTIVE,"علوم","ما العنصر الكيميائي الذي رمزه O؟",listOf("ضروري لتنفس معظم الكائنات الحية","يشكل جزءاً من الهواء والماء"),listOf("الأكسجين","اكسجين"),"رمز الأكسجين الكيميائي هو O."),
+ Challenge(Mode.DETECTIVE,"جغرافيا","ما أطول نهر في أفريقيا؟",listOf("يمر بعدة دول أفريقية","ارتبط به تاريخ مصر القديم"),listOf("نهر النيل","النيل"),"نهر النيل هو أطول أنهار أفريقيا."),
+ Challenge(Mode.DETECTIVE,"تاريخ","من القائد المسلم الذي ارتبط اسمه بفتح الأندلس؟",listOf("عبر المضيق إلى شبه الجزيرة الإيبيرية","سُمي مضيق جبل طارق باسمه"),listOf("طارق بن زياد"),"قاد طارق بن زياد الجيش الذي بدأ فتح الأندلس."),
+ Challenge(Mode.DETECTIVE,"علوم","ما العضو الذي يضخ الدم إلى أنحاء الجسم؟",listOf("يعمل باستمرار","يتكون من أربع حجرات عند الإنسان"),listOf("القلب"),"القلب يضخ الدم عبر الأوعية الدموية."),
+ Challenge(Mode.DETECTIVE,"جغرافيا","ما عاصمة المملكة العربية السعودية؟",listOf("تقع في وسط البلاد تقريباً","من أكبر مدن شبه الجزيرة العربية"),listOf("الرياض"),"الرياض هي عاصمة المملكة العربية السعودية."),
+ Challenge(Mode.RIDDLE,"ألغاز","ما الشيء الذي له عين واحدة ولا يرى؟",listOf("قد تستخدمه في الخياطة","يمر الخيط من فتحته"),listOf("الإبرة"),"عين الإبرة هي الفتحة التي يمر منها الخيط."),
+ Challenge(Mode.RIDDLE,"ألغاز","ما الشيء الذي كلما زاد نقص؟",listOf("يرتبط بمرور الأيام","يستهلكه الإنسان في حياته"),listOf("العمر"),"كلما مر الوقت زاد العمر ونقص المتبقي منه."),
+ Challenge(Mode.RIDDLE,"تفكير منطقي","أم أحمد لديها أربعة أبناء: شمال وجنوب وشرق، ما اسم الرابع؟",listOf("اقرأ بداية اللغز جيداً","الاسم مذكور في أول جملة"),listOf("أحمد"),"اللغز يقول أم أحمد، إذن اسم الابن الرابع أحمد."),
+ Challenge(Mode.RIDDLE,"ألغاز","ما الشيء الذي يسمع بلا أذن ويتكلم بلا لسان؟",listOf("قد يعود إليك صوتك منه","يظهر في الجبال والأماكن الواسعة"),listOf("الصدى"),"الصدى هو انعكاس الصوت."),
+ Challenge(Mode.RIDDLE,"ألغاز","ما الشيء الذي يملأ الغرفة ولا يشغل حيزاً؟",listOf("يساعدك على الرؤية","يأتي من الشمس أو المصباح"),listOf("الضوء"),"الضوء ينتشر في المكان."),
+ Challenge(Mode.RIDDLE,"تفكير منطقي","لديك 3 تفاحات وأخذتَ اثنتين، كم تفاحة أصبحت معك؟",listOf("انتبه إلى كلمة أخذت","السؤال عما أصبح معك أنت"),listOf("تفاحتان","2","٢"),"أخذت تفاحتين، إذن أصبح معك تفاحتان."),
+ Challenge(Mode.RIDDLE,"ألغاز","ما الشيء الذي له رقبة وليس له رأس؟",listOf("قد يحتوي الماء أو العصير","يوجد في المطبخ"),listOf("الزجاجة","القارورة"),"للزجاجة رقبة ولا رأس لها."),
+ Challenge(Mode.RIDDLE,"ألغاز","ما الشيء الذي يمشي بلا قدمين ويبكي بلا عينين؟",listOf("قد تراه في السماء","يرتبط بالمطر"),listOf("السحاب","الغيم"),"السحاب يتحرك في السماء وينزل المطر."),
+ Challenge(Mode.CORRECT,"علوم","صحّح العبارة: الماء يتكون من ذرتي أكسجين وذرة هيدروجين.",listOf("تذكر الصيغة H2O"),listOf("الماء يتكون من ذرتي هيدروجين وذرة أكسجين","ذرتي هيدروجين وذرة أكسجين"),"جزيء الماء H2O يتكون من ذرتي هيدروجين وذرة أكسجين."),
+ Challenge(Mode.CORRECT,"جغرافيا","صحّح العبارة: قارة أفريقيا تقع بالكامل في نصف الكرة الشمالي.",listOf("يمر خط الاستواء عبر القارة"),listOf("تقع أفريقيا في نصفي الكرة الشمالي والجنوبي","يمر خط الاستواء بأفريقيا"),"يمر خط الاستواء عبر أفريقيا."),
+ Challenge(Mode.CORRECT,"علوم","صحّح العبارة: الصوت ينتقل في الفراغ.",listOf("الصوت يحتاج وسطاً مادياً"),listOf("الصوت لا ينتقل في الفراغ","يحتاج الصوت إلى وسط مادي"),"الصوت موجة ميكانيكية تحتاج إلى وسط مادي."),
+ Challenge(Mode.CORRECT,"رياضيات","صحّح العبارة: حاصل ضرب أي عدد في الصفر يساوي العدد نفسه.",listOf("تذكر قاعدة الضرب في الصفر"),listOf("حاصل ضرب أي عدد في الصفر يساوي صفراً","الناتج صفر"),"أي عدد مضروب في الصفر يساوي صفراً."),
+ Challenge(Mode.CORRECT,"علوم","صحّح العبارة: يتجمد الماء عند 100 درجة مئوية.",listOf("100 درجة هي درجة الغليان تقريباً","فكر في الثلج"),listOf("يتجمد الماء عند صفر درجة مئوية","صفر مئوية"),"يتجمد الماء النقي عند نحو صفر درجة مئوية."),
+ Challenge(Mode.CORRECT,"جغرافيا","صحّح العبارة: البحر الأحمر يقع بين قارتي أوروبا وأمريكا.",listOf("يقع بين شمال شرق أفريقيا وشبه الجزيرة العربية"),listOf("يقع بين أفريقيا وآسيا","بين أفريقيا وشبه الجزيرة العربية"),"يفصل البحر الأحمر أجزاء من أفريقيا عن شبه الجزيرة العربية."),
+ Challenge(Mode.CORRECT,"لغة عربية","صحّح العبارة: الفاعل يكون منصوباً دائماً.",listOf("اسأل: من قام بالفعل؟","تذكر علامة الرفع الأصلية"),listOf("الفاعل مرفوع","الفاعل يكون مرفوعاً"),"الفاعل مرفوع."),
+ Challenge(Mode.CORRECT,"علوم","صحّح العبارة: النباتات تحصل على غذائها من التربة فقط.",listOf("تحتاج إلى الماء والضوء وثاني أكسيد الكربون"),listOf("تصنع النباتات غذاءها بالبناء الضوئي","النبات يصنع غذاءه"),"تصنع النباتات غذاءها بالبناء الضوئي."),
+ Challenge(Mode.MEMORY,"ذاكرة","احفظ الترتيب: تفاحة، قلم، قمر، مفتاح، كتاب. ما العنصر الثاني؟",listOf("تخيل الأشياء بالترتيب"),listOf("قلم","القلم"),"العنصر الثاني هو القلم."),
+ Challenge(Mode.MEMORY,"ذاكرة","تذكّر: 4، 9، 2، 7، 5. ما الرقم الخامس؟",listOf("تتبع التسلسل من بدايته"),listOf("5","٥","خمسة"),"الرقم الخامس هو 5."),
+ Challenge(Mode.MEMORY,"ذاكرة","احفظ: أحمر، بنفسجي، أبيض، أخضر، أسود. ما اللون الرابع؟",listOf("رتب الألوان في ذهنك"),listOf("أخضر","الاخضر","الأخضر"),"اللون الرابع هو الأخضر."),
+ Challenge(Mode.MEMORY,"ملاحظة","تذكّر: صنعاء، عدن، تعز، إب. ما المدينة الثالثة؟",listOf("تذكر ترتيب المدن"),listOf("تعز"),"المدينة الثالثة هي تعز."),
+ Challenge(Mode.MEMORY,"ذاكرة","احفظ: 12، 5، 18، 3، 21. ما العدد الأول؟",listOf("ابدأ من أول التسلسل"),listOf("12","١٢","اثنا عشر"),"العدد الأول هو 12."),
+ Challenge(Mode.MEMORY,"ذاكرة","تذكّر: نسر، حصان، سمكة، أرنب. ما الحيوان الثاني؟",listOf("تخيل الحيوانات بالترتيب"),listOf("حصان","الحصان"),"الحيوان الثاني هو الحصان."),
+ Challenge(Mode.MEMORY,"ملاحظة","احفظ: كتاب، نافذة، ساعة، كرسي، مصباح. ما العنصر الأخير؟",listOf("تذكر نهاية القائمة"),listOf("مصباح","المصباح"),"العنصر الأخير هو المصباح."),
+ Challenge(Mode.MEMORY,"ذاكرة","تذكّر: 6، 1، 8، 4، 2، 9. ما الرقم الثالث؟",listOf("عدّ من اليسار إلى اليمين"),listOf("8","٨","ثمانية"),"الرقم الثالث هو 8."),
+ Challenge(Mode.PATTERN,"رياضيات","ما العدد التالي؟ 3، 6، 9، 12، ؟",listOf("أضف المقدار نفسه كل مرة"),listOf("15","خمسة عشر"),"النمط يزيد بمقدار 3."),
+ Challenge(Mode.PATTERN,"رياضيات","أكمل: 100، 90، 80، 70، ؟",listOf("ينقص العدد بمقدار ثابت"),listOf("60","ستون"),"ينقص كل حد بمقدار 10."),
+ Challenge(Mode.PATTERN,"منطق","ما العدد التالي؟ 1، 1، 2، 3، 5، 8، ؟",listOf("كل حد يساوي مجموع الحدين السابقين"),listOf("13","ثلاثة عشر"),"العدد التالي 5 + 8 = 13."),
+ Challenge(Mode.PATTERN,"رياضيات","أكمل النمط: 2، 4، 8، 16، ؟",listOf("يتضاعف العدد كل مرة"),listOf("32","اثنان وثلاثون"),"كل عدد يساوي ضعف السابق."),
+ Challenge(Mode.PATTERN,"رياضيات","ما العدد الناقص؟ 7، 14، 21، ؟، 35",listOf("الأعداد مضاعفات العدد 7"),listOf("28","ثمانية وعشرون"),"العدد الناقص 28."),
+ Challenge(Mode.PATTERN,"منطق","ما العدد التالي؟ 1، 8، 27، 64، ؟",listOf("هذه مكعبات الأعداد الطبيعية"),listOf("125","مئة وخمسة وعشرون"),"العدد التالي 5³ = 125."),
+ Challenge(Mode.PATTERN,"رياضيات","أكمل: 50، 45، 40، 35، ؟",listOf("اطرح خمسة في كل خطوة"),listOf("30","ثلاثون"),"ينقص النمط بمقدار 5."),
+ Challenge(Mode.PATTERN,"منطق","ما العدد التالي؟ 2، 3، 5، 8، 12، 17، ؟",listOf("الفروق تزداد واحداً كل مرة"),listOf("23","ثلاثة وعشرون"),"الفرق التالي 6 والنتيجة 23."),
+ Challenge(Mode.WRITE,"علوم","ما الغاز الذي تمتصه النباتات من الهواء في البناء الضوئي؟",listOf("رمزه الكيميائي CO2"),listOf("ثاني أكسيد الكربون","ثاني اكسيد الكربون"),"تمتص النباتات ثاني أكسيد الكربون في البناء الضوئي."),
+ Challenge(Mode.WRITE,"جغرافيا","ما أكبر محيطات العالم مساحة؟",listOf("يقع بين آسيا وأستراليا والأمريكيتين"),listOf("المحيط الهادئ","الهادئ"),"المحيط الهادئ هو أكبر محيطات الأرض."),
+ Challenge(Mode.WRITE,"تاريخ","في أي قارة تقع الأهرامات المصرية؟",listOf("القارة التي تقع فيها مصر"),listOf("أفريقيا","افريقيا"),"تقع الأهرامات المصرية في قارة أفريقيا."),
+ Challenge(Mode.WRITE,"علوم","ما وحدة قياس شدة التيار الكهربائي؟",listOf("سميت نسبة إلى العالم أندريه أمبير"),listOf("الأمبير","امبير","A"),"الأمبير وحدة قياس شدة التيار الكهربائي."),
+ Challenge(Mode.WRITE,"لغة عربية","ما جمع كلمة كتاب؟",listOf("جمع تكسير شائع"),listOf("كتب","كُتب"),"جمع كتاب هو كتب."),
+ Challenge(Mode.WRITE,"رياضيات","كم يساوي ربع العدد 100؟",listOf("اقسم 100 على أربعة"),listOf("25","٢٥","خمسة وعشرون"),"ربع 100 يساوي 25."),
+ Challenge(Mode.WRITE,"علوم","ما أقرب نجم إلى كوكب الأرض؟",listOf("يمنح الأرض الضوء والحرارة نهاراً"),listOf("الشمس"),"الشمس أقرب نجم إلى الأرض."),
+ Challenge(Mode.WRITE,"جغرافيا","ما عاصمة جمهورية مصر العربية؟",listOf("تقع على نهر النيل"),listOf("القاهرة"),"القاهرة هي عاصمة جمهورية مصر العربية."),
+ Challenge(Mode.WRITE,"ثقافة عامة","كم يوماً في السنة العادية؟",listOf("السنة التي ليست كبيسة"),listOf("365","٣٦٥","ثلاثمئة وخمسة وستون"),"السنة العادية تتكون من 365 يوماً."),
+ Challenge(Mode.WRITE,"علوم","ما اسم تحول الماء من الحالة السائلة إلى الغازية؟",listOf("يحدث عند سطح الماء أو بالغليان"),listOf("التبخر","تبخر"),"التبخر هو تحول السائل إلى غاز.")
+
 )
 private fun normalize(v:String)=v.trim().lowercase().replace("أ","ا").replace("إ","ا").replace("آ","ا").replace("ى","ي").replace("ة","ه").replace(Regex("[ًٌٍَُِّْـ\\u200f\\u200e]"),"").replace(Regex("\\s+")," ")
 
@@ -76,7 +128,7 @@ private fun normalize(v:String)=v.trim().lowercase().replace("أ","ا").replace(
   MaterialTheme(colorScheme=lightColorScheme(background=Canvas,surface=Panel,primary=Gold,secondary=Mint,onBackground=Ink,onSurface=Ink)){
    Surface(Modifier.fillMaxSize(),color=Canvas){
     if(selected==null||current==null) HomeScreen(score,solved,streak){selected=it;qIndex=0}
-    else ChallengeScreen(current,qIndex+1,questions.size,{selected=null}){ok->
+    else ChallengeScreen(current,qIndex+1,questions.size,score,{selected=null},{cost->score-=cost;prefs.edit().putInt("score",score).apply()}){ok->
      if(ok){score+=10;solved++;streak++;prefs.edit().putInt("score",score).putInt("solved",solved).putInt("streak",streak).apply()}
      else{streak=0;prefs.edit().putInt("streak",0).apply()}
      qIndex=(qIndex+1)%questions.size
@@ -145,8 +197,9 @@ private fun normalize(v:String)=v.trim().lowercase().replace("أ","ا").replace(
  }
 }
 @Composable private fun Stat(label:String,value:String){Column{Text(value,color=Color.White,fontSize=20.sp,fontWeight=FontWeight.Bold);Text(label,color=Muted,fontSize=10.sp)}}
-@Composable private fun ChallengeScreen(c:Challenge,number:Int,total:Int,onBack:()->Unit,onNext:(Boolean)->Unit){
- var clueCount by remember(c){mutableIntStateOf(1)}
+@Composable private fun ChallengeScreen(c:Challenge,number:Int,total:Int,score:Int,onBack:()->Unit,onSpend:(Int)->Unit,onNext:(Boolean)->Unit){
+ var clueCount by remember(c){mutableIntStateOf(0)}
+ var helpMessage by remember(c){mutableStateOf("")}
  var answer by remember(c){mutableStateOf("")}
  var checked by remember(c){mutableStateOf(false)}
  var revealMemory by remember(c){mutableStateOf(true)}
@@ -169,9 +222,11 @@ private fun normalize(v:String)=v.trim().lowercase().replace("أ","ا").replace(
    if(c.mode==Mode.MEMORY&&revealMemory){Spacer(Modifier.height(10.dp));Text("⏳ احفظ التسلسل الآن",color=Purple,fontSize=12.sp,fontWeight=FontWeight.Bold)}
   }
   Spacer(Modifier.height(16.dp))
-  Row(verticalAlignment=Alignment.CenterVertically){Text("💡",fontSize=20.sp);Spacer(Modifier.width(7.dp));Text("تلميحات ذكية",color=Ink,fontWeight=FontWeight.Bold,fontSize=15.sp)}
-  c.clues.take(clueCount).forEach{Text("•  "+it,color=Ink,modifier=Modifier.fillMaxWidth().padding(top=9.dp).background(Color.White,RoundedCornerShape(14.dp)).padding(14.dp),fontSize=13.sp)}
-  if(clueCount<c.clues.size&&!checked)TextButton(onClick={clueCount++}){Text("اكشف تلميحاً إضافياً",color=Purple)}
+  Row(Modifier.fillMaxWidth(),verticalAlignment=Alignment.CenterVertically,horizontalArrangement=Arrangement.SpaceBetween){Row(verticalAlignment=Alignment.CenterVertically){Text("💡",fontSize=20.sp);Spacer(Modifier.width(7.dp));Text("المساعد الذكي",color=Ink,fontWeight=FontWeight.Bold,fontSize=15.sp)};Text("🪙 "+score,color=Purple,fontWeight=FontWeight.ExtraBold,fontSize=13.sp)}
+  if(clueCount>0)c.clues.take(clueCount).forEach{Text("•  "+it,color=Ink,modifier=Modifier.fillMaxWidth().padding(top=9.dp).background(Color.White,RoundedCornerShape(14.dp)).padding(14.dp),fontSize=13.sp)}
+  if(!checked&&clueCount<c.clues.size){Button(onClick={if(score>=5){onSpend(5);clueCount++;helpMessage="تم خصم 5 عملات وإظهار تلميح جديد."}else helpMessage="رصيدك غير كافٍ. أجب إجابة صحيحة لتحصل على 10 عملات."},modifier=Modifier.fillMaxWidth().padding(top=10.dp),shape=RoundedCornerShape(14.dp),colors=ButtonDefaults.buttonColors(containerColor=Purple)){Text("استخدم المساعدة  •  5 🪙",fontWeight=FontWeight.Bold)}}
+  if(helpMessage.isNotBlank())Text(helpMessage,color=Purple,fontSize=11.sp,modifier=Modifier.padding(top=7.dp))
+  if(clueCount>=c.clues.size)Text("وصلت إلى آخر تلميح لهذا السؤال.",color=Muted,fontSize=11.sp,modifier=Modifier.padding(top=7.dp))
   Spacer(Modifier.height(12.dp));Text("اكتب إجابتك",color=Ink,fontWeight=FontWeight.Bold,fontSize=14.sp)
   BasicTextField(value=answer,onValueChange={answer=it},enabled=!checked,singleLine=true,modifier=Modifier.fillMaxWidth().padding(top=9.dp).background(Color.White,RoundedCornerShape(15.dp)).padding(17.dp),textStyle=TextStyle(color=Ink,fontSize=16.sp),decorationBox={inner->if(answer.isEmpty())Text("اكتب إجابتك هنا…",color=Muted);inner()})
   Spacer(Modifier.height(15.dp))
