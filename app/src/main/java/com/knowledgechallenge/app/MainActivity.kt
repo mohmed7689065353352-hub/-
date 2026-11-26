@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -804,7 +805,7 @@ private fun normalize(v:String)=v.trim().lowercase().replace("أ","ا").replace(
  Column(Modifier.fillMaxSize().background(Brush.verticalGradient(listOf(Color(0xFF080D2C),Color(0xFF17134A),Color(0xFF26145A),Color(0xFF090D2B)))).verticalScroll(rememberScrollState()).padding(horizontal=18.dp, vertical=16.dp)){
   Row(Modifier.fillMaxWidth(),verticalAlignment=Alignment.CenterVertically,horizontalArrangement=Arrangement.SpaceBetween){
    Row(verticalAlignment=Alignment.CenterVertically){
-    Box(Modifier.size(48.dp).background(Brush.linearGradient(listOf(Color(0xFF7657D6),Color(0xFFB28CF6))),RoundedCornerShape(16.dp)),contentAlignment=Alignment.Center){Text("🧠",fontSize=26.sp)}
+    Image(painter=painterResource(id=R.drawable.ic_launcher),contentDescription="شعار تحدي المعرفة",modifier=Modifier.size(48.dp))
     Spacer(Modifier.width(10.dp));Column{Text("تحدّي المعرفة",color=Color.White,fontSize=21.sp,fontWeight=FontWeight.ExtraBold);Text("العب بذكاء… واصنع إنجازك",color=Color(0xFFBFC9F8),fontSize=11.sp)}
    }
    Row(Modifier.background(Color.White,RoundedCornerShape(20.dp)).padding(horizontal=12.dp,vertical=9.dp),verticalAlignment=Alignment.CenterVertically){Text("🪙",fontSize=16.sp);Spacer(Modifier.width(5.dp));Text(score.toString(),color=ink,fontWeight=FontWeight.Bold,fontSize=14.sp)}
