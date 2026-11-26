@@ -150,6 +150,8 @@ private fun normalize(v:String)=v.trim().lowercase().replace("أ","ا").replace(
  var answer by remember(c){mutableStateOf("")}
  var checked by remember(c){mutableStateOf(false)}
  var revealMemory by remember(c){mutableStateOf(true)}
+ val memorySequence=c.prompt.substringAfter(": ",c.prompt).substringBefore(". ")
+ val memoryQuestion=c.prompt.substringAfter(". ","ما العنصر المطلوب؟")
  val correct=c.answers.any{normalize(answer)==normalize(it)}
  LaunchedEffect(c){if(c.mode==Mode.MEMORY){revealMemory=true;kotlinx.coroutines.delay(3500);revealMemory=false}}
  Column(Modifier.fillMaxSize().background(Canvas).verticalScroll(rememberScrollState()).padding(18.dp)){
@@ -163,7 +165,7 @@ private fun normalize(v:String)=v.trim().lowercase().replace("أ","ا").replace(
   Spacer(Modifier.height(18.dp))
   Column(Modifier.fillMaxWidth().background(Color.White,RoundedCornerShape(23.dp)).padding(19.dp)){
    Text(if(c.mode==Mode.MEMORY&&revealMemory)"احفظ جيداً… ستختفي العناصر بعد لحظات" else "السؤال",color=Gold,fontSize=13.sp,fontWeight=FontWeight.ExtraBold)
-   Spacer(Modifier.height(10.dp));Text(if(c.mode==Mode.MEMORY&&!revealMemory)"انتهى وقت الحفظ! أجب من ذاكرتك." else c.prompt,color=Ink,fontSize=21.sp,fontWeight=FontWeight.Bold,lineHeight=32.sp)
+   Spacer(Modifier.height(10.dp));Text(if(c.mode==Mode.MEMORY){if(revealMemory)memorySequence else memoryQuestion}else c.prompt,color=Ink,fontSize=21.sp,fontWeight=FontWeight.Bold,lineHeight=32.sp)
    if(c.mode==Mode.MEMORY&&revealMemory){Spacer(Modifier.height(10.dp));Text("⏳ احفظ التسلسل الآن",color=Purple,fontSize=12.sp,fontWeight=FontWeight.Bold)}
   }
   Spacer(Modifier.height(16.dp))
