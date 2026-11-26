@@ -24,11 +24,13 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-private val Ink=Color(0xFF081522)
-private val Panel=Color(0xFF142638)
-private val Gold=Color(0xFFE8BD68)
-private val Mint=Color(0xFF5DDEC4)
-private val Muted=Color(0xFF9FB2C2)
+private val Ink=Color(0xFF29243F)
+private val Panel=Color(0xFFFFFFFF)
+private val Gold=Color(0xFFFF8A45)
+private val Mint=Color(0xFF27BFA8)
+private val Muted=Color(0xFF858097)
+private val Canvas=Color(0xFFF5F2FC)
+private val Purple=Color(0xFF7657D6)
 
 class MainActivity:ComponentActivity(){
  override fun onCreate(savedInstanceState:Bundle?){super.onCreate(savedInstanceState);setContent{KnowledgeApp(applicationContext)}}
@@ -71,8 +73,8 @@ private fun normalize(v:String)=v.trim().lowercase().replace("أ","ا").replace(
  val questions=bank.filter{it.mode==selected}
  val current=questions.getOrNull(qIndex%questions.size.coerceAtLeast(1))
  CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl){
-  MaterialTheme(colorScheme=darkColorScheme(background=Ink,surface=Panel,primary=Gold,secondary=Mint,onBackground=Color.White,onSurface=Color.White)){
-   Surface(Modifier.fillMaxSize(),color=Ink){
+  MaterialTheme(colorScheme=lightColorScheme(background=Canvas,surface=Panel,primary=Gold,secondary=Mint,onBackground=Ink,onSurface=Ink)){
+   Surface(Modifier.fillMaxSize(),color=Canvas){
     if(selected==null||current==null) HomeScreen(score,solved,streak){selected=it;qIndex=0}
     else ChallengeScreen(current,qIndex+1,questions.size,{selected=null}){ok->
      if(ok){score+=10;solved++;streak++;prefs.edit().putInt("score",score).putInt("solved",solved).putInt("streak",streak).apply()}
@@ -147,26 +149,38 @@ private fun normalize(v:String)=v.trim().lowercase().replace("أ","ا").replace(
  var clueCount by remember(c){mutableIntStateOf(1)}
  var answer by remember(c){mutableStateOf("")}
  var checked by remember(c){mutableStateOf(false)}
+ var revealMemory by remember(c){mutableStateOf(true)}
  val correct=c.answers.any{normalize(answer)==normalize(it)}
- Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(20.dp)){
-  TextButton(onClick=onBack){Text("→ العودة للرئيسية",color=Gold)}
-  Spacer(Modifier.height(8.dp))
-  Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween){Text(c.mode.title,color=Gold,fontSize=15.sp,fontWeight=FontWeight.Bold);Text("$number / $total",color=Muted,fontSize=12.sp)}
-  Text(c.category,color=Muted,fontSize=12.sp);Spacer(Modifier.height(14.dp))
-  LinearProgressIndicator(progress={number.toFloat()/total.coerceAtLeast(1)},modifier=Modifier.fillMaxWidth(),color=Mint,trackColor=Panel)
-  Spacer(Modifier.height(25.dp));Text(c.prompt,color=Color.White,fontSize=23.sp,fontWeight=FontWeight.Bold,lineHeight=35.sp)
-  Spacer(Modifier.height(22.dp));Text("تلميحات تساعدك",color=Gold,fontWeight=FontWeight.Bold)
-  c.clues.take(clueCount).forEach{Text("•  $it",color=Color.White,modifier=Modifier.fillMaxWidth().padding(top=10.dp).background(Panel,RoundedCornerShape(12.dp)).padding(14.dp))}
-  if(clueCount<c.clues.size&&!checked)TextButton(onClick={clueCount++}){Text("اكشف تلميحاً إضافياً",color=Mint)}
-  Spacer(Modifier.height(15.dp));Text("إجابتك",color=Gold,fontWeight=FontWeight.Bold)
-  BasicTextField(value=answer,onValueChange={answer=it},enabled=!checked,singleLine=true,modifier=Modifier.fillMaxWidth().background(Color(0xFF203244),RoundedCornerShape(14.dp)).padding(16.dp),textStyle=TextStyle(color=Color.White,fontSize=16.sp),decorationBox={inner->if(answer.isEmpty())Text("اكتب إجابتك هنا…",color=Muted);inner()})
+ LaunchedEffect(c){if(c.mode==Mode.MEMORY){revealMemory=true;kotlinx.coroutines.delay(3500);revealMemory=false}}
+ Column(Modifier.fillMaxSize().background(Canvas).verticalScroll(rememberScrollState()).padding(18.dp)){
+  Row(Modifier.fillMaxWidth(),verticalAlignment=Alignment.CenterVertically){TextButton(onClick=onBack){Text("→ رجوع",color=Purple,fontWeight=FontWeight.Bold)};Spacer(Modifier.weight(1f));Text("تحدّي المعرفة",color=Ink,fontWeight=FontWeight.ExtraBold)}
+  Spacer(Modifier.height(12.dp))
+  Column(Modifier.fillMaxWidth().background(Brush.linearGradient(listOf(Purple,Color(0xFFAA83F2))),RoundedCornerShape(24.dp)).padding(18.dp)){
+   Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween){Text(c.mode.title,color=Color.White,fontSize=15.sp,fontWeight=FontWeight.Bold);Text("السؤال "+number+" من "+total,color=Color.White,fontSize=12.sp)}
+   Spacer(Modifier.height(13.dp));LinearProgressIndicator(progress={number.toFloat()/total.coerceAtLeast(1)},modifier=Modifier.fillMaxWidth().height(7.dp),color=Color(0xFFFFD18B),trackColor=Color(0x557FFFFFFF))
+   Spacer(Modifier.height(12.dp));Text("🎯  "+c.category,color=Color.White,fontSize=12.sp)
+  }
+  Spacer(Modifier.height(18.dp))
+  Column(Modifier.fillMaxWidth().background(Color.White,RoundedCornerShape(23.dp)).padding(19.dp)){
+   Text(if(c.mode==Mode.MEMORY&&revealMemory)"احفظ جيداً… ستختفي العناصر بعد لحظات" else "السؤال",color=Gold,fontSize=13.sp,fontWeight=FontWeight.ExtraBold)
+   Spacer(Modifier.height(10.dp));Text(if(c.mode==Mode.MEMORY&&!revealMemory)"انتهى وقت الحفظ! أجب من ذاكرتك." else c.prompt,color=Ink,fontSize=21.sp,fontWeight=FontWeight.Bold,lineHeight=32.sp)
+   if(c.mode==Mode.MEMORY&&revealMemory){Spacer(Modifier.height(10.dp));Text("⏳ احفظ التسلسل الآن",color=Purple,fontSize=12.sp,fontWeight=FontWeight.Bold)}
+  }
+  Spacer(Modifier.height(16.dp))
+  Row(verticalAlignment=Alignment.CenterVertically){Text("💡",fontSize=20.sp);Spacer(Modifier.width(7.dp));Text("تلميحات ذكية",color=Ink,fontWeight=FontWeight.Bold,fontSize=15.sp)}
+  c.clues.take(clueCount).forEach{Text("•  "+it,color=Ink,modifier=Modifier.fillMaxWidth().padding(top=9.dp).background(Color.White,RoundedCornerShape(14.dp)).padding(14.dp),fontSize=13.sp)}
+  if(clueCount<c.clues.size&&!checked)TextButton(onClick={clueCount++}){Text("اكشف تلميحاً إضافياً",color=Purple)}
+  Spacer(Modifier.height(12.dp));Text("اكتب إجابتك",color=Ink,fontWeight=FontWeight.Bold,fontSize=14.sp)
+  BasicTextField(value=answer,onValueChange={answer=it},enabled=!checked,singleLine=true,modifier=Modifier.fillMaxWidth().padding(top=9.dp).background(Color.White,RoundedCornerShape(15.dp)).padding(17.dp),textStyle=TextStyle(color=Ink,fontSize=16.sp),decorationBox={inner->if(answer.isEmpty())Text("اكتب إجابتك هنا…",color=Muted);inner()})
   Spacer(Modifier.height(15.dp))
-  Button(onClick={checked=true},enabled=answer.isNotBlank()&&!checked,modifier=Modifier.fillMaxWidth(),colors=ButtonDefaults.buttonColors(containerColor=Gold,contentColor=Ink)){Text("تحقق من الإجابة",fontWeight=FontWeight.Bold)}
+  Button(onClick={checked=true},enabled=answer.isNotBlank()&&!checked,modifier=Modifier.fillMaxWidth().height(53.dp),shape=RoundedCornerShape(16.dp),colors=ButtonDefaults.buttonColors(containerColor=Gold,contentColor=Color.White)){Text("تحقّق من الإجابة",fontWeight=FontWeight.Bold)}
   if(checked){
-   Spacer(Modifier.height(18.dp));Text(if(correct)"إجابة صحيحة! أحسنت 🎉" else "ليست الإجابة الصحيحة هذه المرة",color=if(correct)Mint else Gold,fontWeight=FontWeight.Bold,fontSize=18.sp)
-   if(!correct)Text("الإجابة النموذجية: "+c.answers.first(),color=Gold,modifier=Modifier.padding(top=8.dp))
-   Text(c.explanation,color=Color.White,modifier=Modifier.padding(top=9.dp),lineHeight=24.sp);Spacer(Modifier.height(14.dp))
-   Button(onClick={onNext(correct)},modifier=Modifier.fillMaxWidth()){Text(if(number==total)"ابدأ النمط من جديد" else "التحدي التالي")}
+   Spacer(Modifier.height(16.dp));Column(Modifier.fillMaxWidth().background(if(correct)Color(0xFFE4F8F1) else Color(0xFFFFF0E8),RoundedCornerShape(18.dp)).padding(16.dp)){
+    Text(if(correct)"🎉 إجابة صحيحة! أحسنت" else "💪 حاول مرة أخرى في الجولة القادمة",color=if(correct)Color(0xFF159A7C) else Color(0xFFCF6C37),fontWeight=FontWeight.ExtraBold,fontSize=17.sp)
+    if(!correct)Text("الإجابة النموذجية: "+c.answers.first(),color=Ink,modifier=Modifier.padding(top=8.dp),fontSize=13.sp)
+    Text(c.explanation,color=Ink,modifier=Modifier.padding(top=9.dp),lineHeight=23.sp,fontSize=13.sp)
+   }
+   Spacer(Modifier.height(14.dp));Button(onClick={onNext(correct)},modifier=Modifier.fillMaxWidth().height(52.dp),shape=RoundedCornerShape(16.dp),colors=ButtonDefaults.buttonColors(containerColor=Purple)){Text(if(number==total)"ابدأ النمط من جديد" else "التحدي التالي",fontWeight=FontWeight.Bold)}
   }
  }
 }
